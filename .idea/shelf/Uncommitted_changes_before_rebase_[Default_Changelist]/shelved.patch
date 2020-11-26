@@ -1,0 +1,962 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_1_7\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ .idea/misc.xml	(date 1606391852000)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Sun Sep 27 12:37:57 IST 2020\ndistributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-6.1.1-all.zip\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ gradle/wrapper/gradle-wrapper.properties	(date 1606391852000)
+@@ -1,6 +1,6 @@
+-#Sun Sep 27 12:37:57 IST 2020
++#Thu Oct 15 09:41:26 IST 2020
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.1.1-all.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.5-bin.zip
+Index: app/src/main/java/com/example/mobiwill/data/LoginDataSource.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/data/LoginDataSource.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/data/LoginDataSource.java	(date 1606391852000)
+@@ -0,0 +1,29 @@
++package com.example.mobiwill.data;
++
++import com.example.mobiwill.data.model.LoggedInUser;
++
++import java.io.IOException;
++
++/**
++ * Class that handles authentication w/ login credentials and retrieves user information.
++ */
++public class LoginDataSource {
++
++    public Result<LoggedInUser> login(String username, String password) {
++
++        try {
++            // TODO: handle loggedInUser authentication
++            LoggedInUser fakeUser =
++                    new LoggedInUser(
++                            java.util.UUID.randomUUID().toString(),
++                            "Jane Doe");
++            return new Result.Success<>(fakeUser);
++        } catch (Exception e) {
++            return new Result.Error(new IOException("Error logging in", e));
++        }
++    }
++
++    public void logout() {
++        // TODO: revoke authentication
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activitylogin_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activitylogin_page.xml	(date 1606391852000)
++++ app/src/main/res/layout/activitylogin_page.xml	(date 1606391852000)
+@@ -0,0 +1,106 @@
++<?xml version="1.0" encoding="utf-8"?>
++<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:id="@+id/container"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:paddingLeft="@dimen/activity_horizontal_margin"
++    android:paddingTop="@dimen/activity_vertical_margin"
++    android:paddingRight="@dimen/activity_horizontal_margin"
++    android:paddingBottom="@dimen/activity_vertical_margin"
++    tools:context=".ui.login.Login_page">
++
++    <EditText
++        android:id="@+id/username"
++        android:layout_width="247dp"
++        android:layout_height="56dp"
++        android:layout_marginTop="244dp"
++        android:layout_marginEnd="24dp"
++        android:hint="@string/prompt_email"
++        android:inputType="textEmailAddress"
++        android:selectAllOnFocus="true"
++        app:layout_constraintEnd_toEndOf="@+id/password"
++        app:layout_constraintHorizontal_bias="0.354"
++        app:layout_constraintStart_toStartOf="@+id/password"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <EditText
++        android:id="@+id/password"
++        android:layout_width="241dp"
++        android:layout_height="51dp"
++        android:layout_marginStart="24dp"
++        android:layout_marginTop="28dp"
++        android:hint="@string/prompt_password"
++        android:imeActionLabel="@string/action_sign_in_short"
++        android:imeOptions="actionDone"
++        android:inputType="textPassword"
++        android:selectAllOnFocus="true"
++        app:layout_constraintEnd_toEndOf="@+id/login"
++        app:layout_constraintHorizontal_bias="0.685"
++        app:layout_constraintStart_toStartOf="@+id/login"
++        app:layout_constraintTop_toBottomOf="@+id/username" />
++
++    <Button
++        android:id="@+id/login"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_gravity="start"
++        android:layout_marginStart="48dp"
++        android:layout_marginTop="16dp"
++        android:layout_marginEnd="48dp"
++        android:layout_marginBottom="64dp"
++        android:enabled="false"
++        android:text="@string/action_sign_in"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.496"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/password"
++        app:layout_constraintVertical_bias="0.0" />
++
++    <ProgressBar
++        android:id="@+id/loading"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_gravity="center"
++        android:layout_marginTop="64dp"
++        android:visibility="gone"
++        app:layout_constraintBottom_toTopOf="@+id/username"
++        app:layout_constraintEnd_toEndOf="@+id/password"
++        app:layout_constraintStart_toStartOf="@+id/password"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.3" />
++
++    <TextView
++        android:id="@+id/textView"
++        android:layout_width="57dp"
++        android:layout_height="17dp"
++        android:text="Mobiwill"
++        app:layout_constraintBottom_toTopOf="@+id/loading"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <ImageView
++        android:id="@+id/imageView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        app:layout_constraintBottom_toTopOf="@+id/username"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="@+id/loading"
++        app:layout_constraintVertical_bias="0.0"
++        tools:src="@tools:sample/avatars" />
++
++    <ImageButton
++        android:id="@+id/imageButton8"
++        android:layout_width="361dp"
++        android:layout_height="56dp"
++        android:src="@drawable/fb_icon1"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.128"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:layout_editor_absoluteY="479dp" />
++</android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/dimens.xml	(date 1606391852000)
++++ app/src/main/res/values/dimens.xml	(date 1606391852000)
+@@ -0,0 +1,5 @@
++<resources>
++    <!-- Default screen margins, per the Android Design guidelines. -->
++    <dimen name="activity_horizontal_margin">16dp</dimen>
++    <dimen name="activity_vertical_margin">16dp</dimen>
++</resources>
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\n\nandroid {\n    compileSdkVersion 29\n\n    defaultConfig {\n        applicationId \"com.example.mobiwill\"\n        minSdkVersion 14\n        targetSdkVersion 29\n        versionCode 1\n        versionName \"1.0\"\n\n        testInstrumentationRunner \"android.support.test.runner.AndroidJUnitRunner\"\n    }\n\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n        }\n    }\n}\n\ndependencies {\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\n    implementation 'com.android.support:appcompat-v7:28.0.0'\n    implementation 'com.android.support.constraint:constraint-layout:2.0.1'\n    testImplementation 'junit:junit:4.12'\n    androidTestImplementation 'com.android.support.test:runner:1.0.2'\n    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ app/build.gradle	(date 1606391852000)
+@@ -25,6 +25,9 @@
+     implementation fileTree(dir: "libs", include: ["*.jar"])
+     implementation 'com.android.support:appcompat-v7:28.0.0'
+     implementation 'com.android.support.constraint:constraint-layout:2.0.1'
++    implementation 'com.android.support:design:28.0.0'
++    implementation 'com.android.support:support-annotations:28.0.0'
++    implementation 'android.arch.lifecycle:extensions:1.1.1'
+     testImplementation 'junit:junit:4.12'
+     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1606391852000)
++++ .idea/vcs.xml	(date 1606391852000)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/ui/login/LoginViewModelFactory.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/ui/login/LoginViewModelFactory.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/ui/login/LoginViewModelFactory.java	(date 1606391852000)
+@@ -0,0 +1,26 @@
++package com.example.mobiwill.ui.login;
++
++import android.arch.lifecycle.ViewModel;
++import android.arch.lifecycle.ViewModelProvider;
++import android.support.annotation.NonNull;
++
++import com.example.mobiwill.data.LoginDataSource;
++import com.example.mobiwill.data.LoginRepository;
++
++/**
++ * ViewModel provider factory to instantiate LoginViewModel.
++ * Required given LoginViewModel has a non-empty constructor
++ */
++public class LoginViewModelFactory implements ViewModelProvider.Factory {
++
++    @NonNull
++    @Override
++    @SuppressWarnings("unchecked")
++    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
++        if (modelClass.isAssignableFrom(LoginViewModel.class)) {
++            return (T) new LoginViewModel(LoginRepository.getInstance(new LoginDataSource()));
++        } else {
++            throw new IllegalArgumentException("Unknown ViewModel class");
++        }
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/ui/login/LoggedInUserView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/ui/login/LoggedInUserView.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/ui/login/LoggedInUserView.java	(date 1606391852000)
+@@ -0,0 +1,17 @@
++package com.example.mobiwill.ui.login;
++
++/**
++ * Class exposing authenticated user details to the UI.
++ */
++class LoggedInUserView {
++    private String displayName;
++    //... other data fields that may be accessible to the UI
++
++    LoggedInUserView(String displayName) {
++        this.displayName = displayName;
++    }
++
++    String getDisplayName() {
++        return displayName;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<android.support.constraint.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".MainActivity\">\n\n    <TextView\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:text=\"Hello World!\"\n        app:layout_constraintBottom_toBottomOf=\"parent\"\n        app:layout_constraintLeft_toLeftOf=\"parent\"\n        app:layout_constraintRight_toRightOf=\"parent\"\n        app:layout_constraintTop_toTopOf=\"parent\" />\n\n</android.support.constraint.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ app/src/main/res/layout/activity_main.xml	(date 1606391852000)
+@@ -9,10 +9,32 @@
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="Hello World!"
++        android:fontFamily="@font"
++        android:text="MobiWill"
+         app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintRight_toRightOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.109" />
++
++    <Button
++        android:id="@+id/button"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Button"
++        tools:layout_editor_absoluteX="167dp"
++        tools:layout_editor_absoluteY="497dp" />
++
++    <ImageView
++        android:id="@+id/imageView3"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        tools:layout_editor_absoluteY="185dp"
++        tools:srcCompat="@tools:sample/avatars" />
+ 
+ </android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/ui/login/LoginResult.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/ui/login/LoginResult.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/ui/login/LoginResult.java	(date 1606391852000)
+@@ -0,0 +1,31 @@
++package com.example.mobiwill.ui.login;
++
++import android.support.annotation.Nullable;
++
++/**
++ * Authentication result : success (user details) or error message.
++ */
++class LoginResult {
++    @Nullable
++    private LoggedInUserView success;
++    @Nullable
++    private Integer error;
++
++    LoginResult(@Nullable Integer error) {
++        this.error = error;
++    }
++
++    LoginResult(@Nullable LoggedInUserView success) {
++        this.success = success;
++    }
++
++    @Nullable
++    LoggedInUserView getSuccess() {
++        return success;
++    }
++
++    @Nullable
++    Integer getError() {
++        return error;
++    }
++}
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1606391852000)
++++ .idea/compiler.xml	(date 1606391852000)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <bytecodeTargetLevel target="1.8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/ui/login/LoginViewModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/ui/login/LoginViewModel.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/ui/login/LoginViewModel.java	(date 1606391852000)
+@@ -0,0 +1,69 @@
++package com.example.mobiwill.ui.login;
++
++import android.arch.lifecycle.LiveData;
++import android.arch.lifecycle.MutableLiveData;
++import android.arch.lifecycle.ViewModel;
++import android.util.Patterns;
++
++import com.example.mobiwill.data.LoginRepository;
++import com.example.mobiwill.data.Result;
++import com.example.mobiwill.data.model.LoggedInUser;
++import com.example.mobiwill.R;
++
++public class LoginViewModel extends ViewModel {
++
++    private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
++    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
++    private LoginRepository loginRepository;
++
++    LoginViewModel(LoginRepository loginRepository) {
++        this.loginRepository = loginRepository;
++    }
++
++    LiveData<LoginFormState> getLoginFormState() {
++        return loginFormState;
++    }
++
++    LiveData<LoginResult> getLoginResult() {
++        return loginResult;
++    }
++
++    public void login(String username, String password) {
++        // can be launched in a separate asynchronous job
++        Result<LoggedInUser> result = loginRepository.login(username, password);
++
++        if (result instanceof Result.Success) {
++            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
++            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
++        } else {
++            loginResult.setValue(new LoginResult(R.string.login_failed));
++        }
++    }
++
++    public void loginDataChanged(String username, String password) {
++        if (!isUserNameValid(username)) {
++            loginFormState.setValue(new LoginFormState(R.string.invalid_username, null));
++        } else if (!isPasswordValid(password)) {
++            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
++        } else {
++            loginFormState.setValue(new LoginFormState(true));
++        }
++    }
++
++    // A placeholder username validation check
++    private boolean isUserNameValid(String username) {
++        if (username == null) {
++            return false;
++        }
++        if (username.contains("@")) {
++            return Patterns.EMAIL_ADDRESS.matcher(username).matches();
++        } else {
++            return !username.trim().isEmpty();
++        }
++    }
++
++    // A placeholder password validation check
++    private boolean isPasswordValid(String password) {
++        return password != null && password.trim().length() > 5;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <string name=\"app_name\">MobiWill</string>\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ app/src/main/res/values/strings.xml	(date 1606391852000)
+@@ -1,3 +1,12 @@
+ <resources>
+     <string name="app_name">MobiWill</string>
++    <string name="title_activity_login_page">Login_page</string>
++    <string name="prompt_email">Email</string>
++    <string name="prompt_password">Password</string>
++    <string name="action_sign_in">Sign in or register</string>
++    <string name="action_sign_in_short">Sign in</string>
++    <string name="welcome">"Welcome !"</string>
++    <string name="invalid_username">Not a valid username</string>
++    <string name="invalid_password">Password must be >5 characters</string>
++    <string name="login_failed">"Login failed"</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/ui/login/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/ui/login/LoginActivity.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/ui/login/LoginActivity.java	(date 1606391852000)
+@@ -0,0 +1,125 @@
++package com.example.mobiwill.ui.login;
++
++import android.app.Activity;
++import android.arch.lifecycle.Observer;
++import android.arch.lifecycle.ViewModelProviders;
++import android.os.Bundle;
++import android.support.annotation.Nullable;
++import android.support.annotation.StringRes;
++import android.support.v7.app.AppCompatActivity;
++import android.text.Editable;
++import android.text.TextWatcher;
++import android.view.KeyEvent;
++import android.view.View;
++import android.view.inputmethod.EditorInfo;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.ProgressBar;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import com.example.mobiwill.R;
++
++public class LoginActivity extends AppCompatActivity {
++
++    private LoginViewModel loginViewModel;
++
++    @Override
++    public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activitylogin_page);
++        loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
++                .get(LoginViewModel.class);
++
++        final EditText usernameEditText = findViewById(R.id.username);
++        final EditText passwordEditText = findViewById(R.id.password);
++        final Button loginButton = findViewById(R.id.login);
++        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
++
++        loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
++            @Override
++            public void onChanged(@Nullable LoginFormState loginFormState) {
++                if (loginFormState == null) {
++                    return;
++                }
++                loginButton.setEnabled(loginFormState.isDataValid());
++                if (loginFormState.getUsernameError() != null) {
++                    usernameEditText.setError(getString(loginFormState.getUsernameError()));
++                }
++                if (loginFormState.getPasswordError() != null) {
++                    passwordEditText.setError(getString(loginFormState.getPasswordError()));
++                }
++            }
++        });
++
++        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
++            @Override
++            public void onChanged(@Nullable LoginResult loginResult) {
++                if (loginResult == null) {
++                    return;
++                }
++                loadingProgressBar.setVisibility(View.GONE);
++                if (loginResult.getError() != null) {
++                    showLoginFailed(loginResult.getError());
++                }
++                if (loginResult.getSuccess() != null) {
++                    updateUiWithUser(loginResult.getSuccess());
++                }
++                setResult(Activity.RESULT_OK);
++
++                //Complete and destroy login activity once successful
++                finish();
++            }
++        });
++
++        TextWatcher afterTextChangedListener = new TextWatcher() {
++            @Override
++            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
++                // ignore
++            }
++
++            @Override
++            public void onTextChanged(CharSequence s, int start, int before, int count) {
++                // ignore
++            }
++
++            @Override
++            public void afterTextChanged(Editable s) {
++                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
++                        passwordEditText.getText().toString());
++            }
++        };
++        usernameEditText.addTextChangedListener(afterTextChangedListener);
++        passwordEditText.addTextChangedListener(afterTextChangedListener);
++        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
++
++            @Override
++            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
++                if (actionId == EditorInfo.IME_ACTION_DONE) {
++                    loginViewModel.login(usernameEditText.getText().toString(),
++                            passwordEditText.getText().toString());
++                }
++                return false;
++            }
++        });
++
++        loginButton.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                loadingProgressBar.setVisibility(View.VISIBLE);
++                loginViewModel.login(usernameEditText.getText().toString(),
++                        passwordEditText.getText().toString());
++            }
++        });
++    }
++
++    private void updateUiWithUser(LoggedInUserView model) {
++        String welcome = getString(R.string.welcome) + model.getDisplayName();
++        // TODO : initiate successful logged in experience
++        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
++    }
++
++    private void showLoginFailed(@StringRes Integer errorString) {
++        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/ui/login/LoginFormState.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/ui/login/LoginFormState.java	(date 1606391852000)
++++ app/src/main/java/com/example/mobiwill/ui/login/LoginFormState.java	(date 1606391852000)
+@@ -0,0 +1,40 @@
++package com.example.mobiwill.ui.login;
++
++import android.support.annotation.Nullable;
++
++/**
++ * Data validation state of the login form.
++ */
++class LoginFormState {
++    @Nullable
++    private Integer usernameError;
++    @Nullable
++    private Integer passwordError;
++    private boolean isDataValid;
++
++    LoginFormState(@Nullable Integer usernameError, @Nullable Integer passwordError) {
++        this.usernameError = usernameError;
++        this.passwordError = passwordError;
++        this.isDataValid = false;
++    }
++
++    LoginFormState(boolean isDataValid) {
++        this.usernameError = null;
++        this.passwordError = null;
++        this.isDataValid = isDataValid;
++    }
++
++    @Nullable
++    Integer getUsernameError() {
++        return usernameError;
++    }
++
++    @Nullable
++    Integer getPasswordError() {
++        return passwordError;
++    }
++
++    boolean isDataValid() {
++        return isDataValid;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"com.example.mobiwill\">\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/AppTheme\">\n        <activity android:name=\".MainActivity\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ app/src/main/AndroidManifest.xml	(date 1606391852000)
+@@ -9,6 +9,9 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
++        <activity
++            android:name=".ui.login.Login_page"
++            android:label="@string/title_activity_login_page" />
+         <activity android:name=".MainActivity">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+Index: app/src/main/java/com/example/mobiwill/data/LoginRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/data/LoginRepository.java	(date 1606391853000)
++++ app/src/main/java/com/example/mobiwill/data/LoginRepository.java	(date 1606391853000)
+@@ -0,0 +1,54 @@
++package com.example.mobiwill.data;
++
++import com.example.mobiwill.data.model.LoggedInUser;
++
++/**
++ * Class that requests authentication and user information from the remote data source and
++ * maintains an in-memory cache of login status and user credentials information.
++ */
++public class LoginRepository {
++
++    private static volatile LoginRepository instance;
++
++    private LoginDataSource dataSource;
++
++    // If user credentials will be cached in local storage, it is recommended it be encrypted
++    // @see https://developer.android.com/training/articles/keystore
++    private LoggedInUser user = null;
++
++    // private constructor : singleton access
++    private LoginRepository(LoginDataSource dataSource) {
++        this.dataSource = dataSource;
++    }
++
++    public static LoginRepository getInstance(LoginDataSource dataSource) {
++        if (instance == null) {
++            instance = new LoginRepository(dataSource);
++        }
++        return instance;
++    }
++
++    public boolean isLoggedIn() {
++        return user != null;
++    }
++
++    public void logout() {
++        user = null;
++        dataSource.logout();
++    }
++
++    private void setLoggedInUser(LoggedInUser user) {
++        this.user = user;
++        // If user credentials will be cached in local storage, it is recommended it be encrypted
++        // @see https://developer.android.com/training/articles/keystore
++    }
++
++    public Result<LoggedInUser> login(String username, String password) {
++        // handle login
++        Result<LoggedInUser> result = dataSource.login(username, password);
++        if (result instanceof Result.Success) {
++            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
++        }
++        return result;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/data/Result.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/data/Result.java	(date 1606391853000)
++++ app/src/main/java/com/example/mobiwill/data/Result.java	(date 1606391853000)
+@@ -0,0 +1,48 @@
++package com.example.mobiwill.data;
++
++/**
++ * A generic class that holds a result success w/ data or an error exception.
++ */
++public class Result<T> {
++    // hide the private constructor to limit subclass types (Success, Error)
++    private Result() {
++    }
++
++    @Override
++    public String toString() {
++        if (this instanceof Result.Success) {
++            Result.Success success = (Result.Success) this;
++            return "Success[data=" + success.getData().toString() + "]";
++        } else if (this instanceof Result.Error) {
++            Result.Error error = (Result.Error) this;
++            return "Error[exception=" + error.getError().toString() + "]";
++        }
++        return "";
++    }
++
++    // Success sub-class
++    public final static class Success<T> extends Result {
++        private T data;
++
++        public Success(T data) {
++            this.data = data;
++        }
++
++        public T getData() {
++            return this.data;
++        }
++    }
++
++    // Error sub-class
++    public final static class Error extends Result {
++        private Exception error;
++
++        public Error(Exception error) {
++            this.error = error;
++        }
++
++        public Exception getError() {
++            return this.error;
++        }
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/mobiwill/data/model/LoggedInUser.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/mobiwill/data/model/LoggedInUser.java	(date 1606391853000)
++++ app/src/main/java/com/example/mobiwill/data/model/LoggedInUser.java	(date 1606391853000)
+@@ -0,0 +1,23 @@
++package com.example.mobiwill.data.model;
++
++/**
++ * Data class that captures user information for logged in users retrieved from LoginRepository
++ */
++public class LoggedInUser {
++
++    private String userId;
++    private String displayName;
++
++    public LoggedInUser(String userId, String displayName) {
++        this.userId = userId;
++        this.displayName = displayName;
++    }
++
++    public String getUserId() {
++        return userId;
++    }
++
++    public String getDisplayName() {
++        return displayName;
++    }
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/activityhome_page.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activityhome_page.xml	(date 1606391853000)
++++ app/src/main/res/layout/activityhome_page.xml	(date 1606391853000)
+@@ -0,0 +1,62 @@
++<?xml version="1.0" encoding="utf-8"?>
++<android.support.constraint.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent">
++
++    <ImageButton
++        android:id="@+id/imageButton"
++        android:layout_width="155dp"
++        android:layout_height="133dp"
++        android:layout_marginTop="44dp"
++        android:contentDescription="TODO"
++        app:layout_constraintTop_toTopOf="parent"
++        app:srcCompat="@drawable/unknown_1"
++        tools:layout_editor_absoluteX="35dp" />
++
++    <ImageButton
++        android:id="@+id/imageButton2"
++        android:layout_width="153dp"
++        android:layout_height="134dp"
++        android:contentDescription="TODO"
++        app:srcCompat="@drawable/unknown_2"
++        tools:layout_editor_absoluteX="217dp"
++        tools:layout_editor_absoluteY="52dp" />
++
++    <ImageButton
++        android:id="@+id/imageButton3"
++        android:layout_width="144dp"
++        android:layout_height="141dp"
++        android:contentDescription="TODO"
++        app:srcCompat="@drawable/unknown_4"
++        tools:layout_editor_absoluteX="35dp"
++        tools:layout_editor_absoluteY="216dp" />
++
++    <ImageButton
++        android:id="@+id/imageButton4"
++        android:layout_width="152dp"
++        android:layout_height="152dp"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.398"
++        app:srcCompat="@drawable/unknown_3"
++        tools:layout_editor_absoluteX="214dp" />
++
++    <ImageButton
++        android:id="@+id/imageButton5"
++        android:layout_width="148dp"
++        android:layout_height="154dp"
++        app:srcCompat="@drawable/unknown"
++        tools:layout_editor_absoluteX="35dp"
++        tools:layout_editor_absoluteY="439dp" />
++
++    <ImageButton
++        android:id="@+id/imageButton6"
++        android:layout_width="155dp"
++        android:layout_height="139dp"
++        app:srcCompat="@drawable/unknown_5"
++        tools:layout_editor_absoluteX="217dp"
++        tools:layout_editor_absoluteY="439dp" />
++</android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/render.experimental.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/render.experimental.xml	(date 1606391853000)
++++ .idea/render.experimental.xml	(date 1606391853000)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="RenderSettings">
++    <option name="showDecorations" value="true" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"testRunner\" value=\"PLATFORM\" />\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleHome\" value=\"/usr/local/Cellar/gradle/6.5.1/libexec\" />\n        <option name=\"gradleJvm\" value=\"1.8\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n          </set>\n        </option>\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision 2e88f4612bbceca092b99fa7fe3d7cb81f7b2752)
++++ .idea/gradle.xml	(date 1606391853000)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+@@ -15,6 +16,7 @@
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
++        <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+   </component>
